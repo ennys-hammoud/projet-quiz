@@ -1,72 +1,65 @@
+<?php
+require 'config.php'; // Connexion à la base de données
+
+// Récupérer tous les quiz
+$query = $pdo->prepare("SELECT * FROM quizzes");
+$query->execute();
+$quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet Quiz - Accueil</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Liste des Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .quiz-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .quiz-card {
+            width: 45%; /* Largeur de chaque colonne */
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .quiz-card h2 {
+            font-size: 1.5em;
+        }
+        .quiz-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .quiz-card a:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
+    <h1>Liste des Quiz</h1>
 
-    <!-- HEADER -->
-    <header>
-        <div class="logo">Projet Quiz</div>
-        <nav>
-            <ul>
-                <li><a href="#">Menu</a></li>
-                <li><a href="quiz.php">Quiz</a></li>
-                <li><a href="#">Connexion</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- SECTION D'ACCUEIL -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Bienvenue sur  Quizz'APP</h1>
-            <p>Testez vos connaissances sur divers thèmes !</p>
-            <a href="quiz.php" class="btn">Commencer un quiz</a>
-        </div>
-    </section>
-    <main>
-        <div class="quiz-container">
-            <!-- Carte Football -->
-            <div class="quiz-card" id="football">
-                <h2>Football</h2>
-                <p>Testez vos connaissances sur le football !</p>
-                <a href="football.html" class="btn">Commencer</a>
+    <div class="quiz-container">
+        <?php foreach ($quizzes as $quiz): ?>
+            <div class="quiz-card">
+                <h2><?= htmlspecialchars($quiz['title']) ?></h2>
+                <p>Catégorie: <?= htmlspecialchars($quiz['category']) ?></p>
+                <a href="quiz.php?quiz_id=<?= $quiz['id'] ?>">Commencer le quiz</a>
             </div>
-
-            <!-- Carte Cuisine -->
-            <div class="quiz-card" id="cuisine">
-                <h2>Cuisine</h2>
-                <p>Explorez le monde de la cuisine avec des quiz délicieux !</p>
-                <a href="cuisine.html" class="btn">Commencer</a>
-            </div>
-
-            <!-- Carte Histoire -->
-            <div class="quiz-card" id="histoire">
-                <h2>Histoire</h2>
-                <p>Plongez dans l'histoire et testez vos connaissances !</p>
-                <a href="histoire.html" class="btn">Commencer</a>
-            </div>
-
-            <!-- Carte Cinéma -->
-            <div class="quiz-card" id="cinema">
-                <h2>Cinéma</h2>
-                <p>Devenez un expert en cinéma avec nos quiz !</p>
-                <a href="cinema.html" class="btn">Commencer</a>
-            </div>
-        </div>
-    </main>
-
-
-
-    <!-- FOOTER -->
-    <footer>
-        <p>&copy; 2025  Quizz'APP - Tous droits réservés.</p>
-    </footer>
+        <?php endforeach; ?>
+    </div>
 
 </body>
 </html>
