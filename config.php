@@ -1,19 +1,10 @@
 <?php
-// Paramètres de connexion
-$host = 'localhost';
-$dbname = 'quiz_night';
-$username = 'root'; // À remplacer si nécessaire
-$password = 'root'; // À modifier si un mot de passe est défini
+require_once 'classes/Database.php';  // Pour la connexion à la base de données
+require_once 'classes/Quiz.php';     // Pour la classe Quiz
+require_once 'classes/Answers.php';   // Pour la classe Answer
+require_once 'classes/Question.php'; // Pour la classe Question
+require_once 'classes/User.php';     // Pour la classe User
 
-try {
-    // Création de la connexion PDO
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    
-    // Configuration des options PDO
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-} catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
-}
+$db = new Database();
+$pdo = $db->getConnection();
 ?>

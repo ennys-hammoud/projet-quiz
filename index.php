@@ -1,5 +1,11 @@
 <?php
-require 'config.php'; // Connexion à la base de données
+session_start(); // Démarrage de la session
+
+require_once 'classes/Database.php';  // Pour la connexion à la base de données
+require_once 'classes/Quiz.php';     // Pour la classe Quiz
+
+$db = new Database();
+$pdo = $db->getConnection();
 
 // Récupérer tous les quiz
 $query = $pdo->prepare("SELECT * FROM quizzes");
@@ -16,6 +22,7 @@ $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 20px;
         }
         .quiz-container {
             display: flex;
@@ -23,9 +30,9 @@ $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
             justify-content: space-around;
         }
         .quiz-card {
-            width: 45%; /* Largeur de chaque colonne */
+            width: 45%;
             margin-bottom: 20px;
-            padding: 10px;
+            padding: 15px;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);

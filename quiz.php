@@ -1,20 +1,37 @@
 <?php
-require 'config.php'; // Connexion à la base de données
-$quiz_id = isset($_GET['quiz_id']) ? (int)$_GET['quiz_id'] : 1; // Récupère le quiz_id de l'URL, sinon par défaut 1
+require_once 'classes/Quiz.php'; // Pour la classe Quiz
+require_once 'classes/Answers.php'; // Pour la classe Answer
+require_once 'classes/Question.php'; // Pour la classe Question
+require_once 'classes/User.php'; // Pour la classe User
 
-// Vérifier si le quiz existe
-$query = $pdo->prepare("SELECT * FROM quizzes WHERE id = ?");
-$query->execute([$quiz_id]);
-$quiz = $query->fetch(PDO::FETCH_ASSOC);
-
-if (!$quiz) {
-    die("Quiz introuvable !");
+// Récupérer le quiz_id depuis l'URL (méthode GET)
+if (!isset($_GET['quiz_id']) || !is_numeric($_GET['quiz_id'])) {
+    die("Quiz non valide !");
 }
+$quiz_id = $_GET['quiz_id'];
 
-// Récupérer les questions du quiz
-$query = $pdo->prepare("SELECT * FROM questions WHERE quiz_id = ?");
-$query->execute([$quiz_id]);
-$questions = $query->fetchAll(PDO::FETCH_ASSOC);
+$db = new Database();
+$pdo = $db->getConnection();
+
+
+
+try {
+    // Vérifier si le quiz existe
+    $query = $pdo->prepare("SELECT * FROM quizzes WHERE id = ?");
+    $query->execute([$quiz_id]);
+    $quiz = $query->fetch(PDO::FETCH_ASSOC);
+
+    if (!$quiz) {
+        die("Quiz introuvable !");
+    }
+
+    // Récupérer les questions du quiz
+    $query = $pdo->prepare("SELECT * FROM questions WHERE quiz_id = ?");
+    $query->execute([$quiz_id]);
+    $questions = $query->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    die("Erreur lors de la récupération des données : " . $e->getMessage());
+}
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +51,7 @@ $questions = $query->fetchAll(PDO::FETCH_ASSOC);
             <fieldset>
                 <legend><?= htmlspecialchars($question['question_text']) ?></legend>
                 <?php
+                // Récupérer les réponses possibles pour chaque question
                 $query = $pdo->prepare("SELECT * FROM answers WHERE question_id = ?");
                 $query->execute([$question['id']]);
                 $answers = $query->fetchAll(PDO::FETCH_ASSOC);
