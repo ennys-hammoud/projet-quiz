@@ -22,18 +22,20 @@ $latestQuizzes = $pdo->query("SELECT title, created_at FROM quizzes ORDER BY cre
 // Récupération de la liste des quiz
 $stmt = $pdo->query("SELECT * FROM quizzes ORDER BY created_at DESC");
 $quizzes = $stmt->fetchAll();
-?>
 
+$title = "Admin - Dashboard";
+require 'header.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Dashboard</title>
-    <link rel="stylesheet" href="styles/admin.css"> <!-- Fichier CSS séparé -->
+    <title><?php echo $title; ?></title>
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <nav>
+    <nav class="admin-nav">
         <ul>
             <li><a href="admin.php">Dashboard</a></li>
             <li><a href="add_quiz.php">Ajouter un Quiz</a></li>
@@ -41,28 +43,28 @@ $quizzes = $stmt->fetchAll();
             <li><a href="logout.php">Déconnexion</a></li>
         </ul>
     </nav>
-    
-    <h1>Bienvenue, <?= htmlspecialchars($_SESSION["username"]) ?> !</h1>
-    
+
+    <h1>Bienvenue, <?php echo htmlspecialchars($_SESSION["username"]); ?> !</h1>
+
     <section class="stats">
         <div class="stat-box">
             <h3>Total Quiz</h3>
-            <p><?= $quizCount ?></p>
+            <p><?php echo $quizCount; ?></p>
         </div>
         <div class="stat-box">
             <h3>Utilisateurs Inscrits</h3>
-            <p><?= $userCount ?></p>
+            <p><?php echo $userCount; ?></p>
         </div>
         <div class="stat-box">
             <h3>Derniers Quiz</h3>
             <ul>
-                <?php foreach ($latestQuizzes as $quiz) {
-                    echo "<li>" . htmlspecialchars($quiz['title']) . " (" . $quiz['created_at'] . ")</li>";
-                } ?>
+                <?php foreach ($latestQuizzes as $quiz) : ?>
+                    <li><?php echo htmlspecialchars($quiz['title']); ?> (<?php echo $quiz['created_at']; ?>)</li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </section>
-    
+
     <h2>Gestion des Quiz</h2>
     <table>
         <thead>
@@ -74,19 +76,21 @@ $quizzes = $stmt->fetchAll();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($quizzes as $quiz) { ?>
+            <?php foreach ($quizzes as $quiz) : ?>
                 <tr>
-                    <td><?= htmlspecialchars($quiz['title']) ?></td>
-                    <td><?= htmlspecialchars($quiz['category']) ?></td>
-                    <td><?= $quiz['created_at'] ?></td>
+                    <td><?php echo htmlspecialchars($quiz['title']); ?></td>
+                    <td><?php echo htmlspecialchars($quiz['category']); ?></td>
+                    <td><?php echo $quiz['created_at']; ?></td>
                     <td>
-                        <a href='edit_quiz.php?id=<?= $quiz['id'] ?>'>Modifier</a> |
-                        <a href='manage_questions.php?quiz_id=<?= $quiz['id'] ?>'>Gérer Questions/Réponses</a> |
-                        <a href='delete_quiz.php?id=<?= $quiz['id'] ?>' onclick='return confirm("Supprimer ce quiz ?")'>Supprimer</a>
+                        <a href='edit_quiz.php?id=<?= $quiz['id'] ?>' class="action-link">Modifier</a> |
+                        <a href='manage_questions.php?quiz_id=<?= $quiz['id'] ?>' class="action-link">Gérer Questions/Réponses</a> |
+                        <a href='delete_quiz.php?id=<?= $quiz['id'] ?>' class="action-link" onclick='return confirm("Supprimer ce quiz ?")'>Supprimer</a>
                     </td>
                 </tr>
-            <?php } ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
+
+<?php require 'footer.php'; ?>
 </body>
 </html>

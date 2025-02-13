@@ -1,0 +1,203 @@
+/* admin.css */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #000;
+    color: #00f7ff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* Pour centrer le contenu */
+}
+
+header {
+    display: flex;
+    justify-content: flex-start; /* Assure que le contenu est aligné à gauche */
+    width: 100%;
+}
+
+
+.container, .admin-section {
+    width: 90%; /* Limite la largeur à 90% de la page */
+    max-width: 1200px; /* Pour éviter que le contenu devienne trop large */
+    margin: 20px auto;  /* Centre horizontalement et ajoute un espace vertical */
+}
+
+nav {
+    background-color: #1c1c1c;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 247, 255, 0.5);
+    margin-left: 40%;
+    margin-top: 5%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: #00f7ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #B42CCA;
+}
+
+.admin-section {
+    padding: 20px;
+    background-color: #0e0e0e;
+    min-height: 80vh;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 247, 255, 0.3);
+    margin: 20px;
+}
+
+h1, h2, h3 {
+    color: #00f7ff;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.stats {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    background-color: #1c1c1c;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.3);
+    text-align: center;
+    flex: 1;
+}
+
+.stat-box h3 {
+    margin-bottom: 5px;
+    color: #B42CCA;
+}
+
+.stat-box p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    background-color: #1c1c1c;
+    box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+thead {
+    background-color: #B42CCA;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    color: #00f7ff;
+}
+
+tr:hover {
+    background-color: rgba(0, 247, 255, 0.1);
+}
+
+a.action-link {
+    color: #B42CCA;
+    text-decoration: none;
+    margin-right: 8px;
+}
+
+a.action-link:hover {
+    text-decoration: underline;
+    color: #8e1fa9;
+}
+
+button, .btn {
+    background-color: #B42CCA;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #8e1fa9;
+}
+
+footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #00f7ff;
+    font-size: 0.9em;
+}
+
+.header-nav {
+    background-color: #1c1c1c;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 247, 255, 0.5);
+    margin-top: 1%;
+    display: flex;
+    justify-content: flex-end;  /* Aligne le nav à droite */
+    width: 31%;
+    position: absolute;  /* Permet de le positionner précisément */
+    right: 2%;  /* C
+}
+
+.header-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+    justify-content: center;  /* Centre les éléments dans le ul */
+}
+.header-nav a {
+    color: #00f7ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #B42CCA;
+}
+
+/* Pour le menu de navigation de l'admin */
+.admin-nav {
+    background-color: #1c1c1c;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 247, 255, 0.5);
+    width: 50%;  /* Ajuste la largeur à ce que tu souhaites */
+    margin: 5% auto;  /* Centre horizontalement avec un espacement vertical */
+}
+.admin-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+.admin-nav a {
+    color: #00f7ff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.admin-nav a:hover {
+    color: #B42CCA;
+}

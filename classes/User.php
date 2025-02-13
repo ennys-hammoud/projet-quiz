@@ -19,24 +19,23 @@ class User {
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ':username' => $username,
-            ':email' => $email,
             ':password' => $hashedPassword
         ]);
     }
 
     // Connexion utilisateur
-    public function login($email, $password) {
-        $query = "SELECT * FROM users WHERE email = :email";
+    public function login($username, $password){
+        $query = "SELECT id, username, password FROM users WHERE username = :username";
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute([':email' => $email]);
+        $stmt->execute([':username' => $username]);
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
-            return true; // Connexion réussie
+            return true;
         }
-        return false; // Échec de connexion
+        return false;
     }
 
     // Vérifier si l'utilisateur est connecté
@@ -54,10 +53,9 @@ class User {
 
     // Récupérer un utilisateur par son ID
     public function getUserById($id) {
-        $query = "SELECT id, username, email FROM users WHERE id = :id";
+        $query = "SELECT id, username FROM users WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute([':id' => $id]);
         return $stmt->fetch();
     }
 }
-?>
