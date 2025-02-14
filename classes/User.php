@@ -15,7 +15,7 @@ class User {
     public function register($username, $email, $password) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $query = "INSERT INTO users (username, email, password) VALUES (:username, :email, :password)";
+        $query = "INSERT INTO users (username, , password) VALUES (:username, :password)";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ':username' => $username,
