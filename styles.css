@@ -1,0 +1,403 @@
+/* Styles pour la fenêtre modale */
+        .modal {
+            display: none;
+            position: fixed;
+            left: 0;
+            left: 0;
+            top: 0;
+            width: 100%;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal_content {
+        
+            
+            background-image: linear-gradient(to bottom,#00f7ff,#B42CCA);
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 100%;
+
+        }
+
+        .modal_close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+    
+        .modal_close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Styles pour afficher la modale */
+        #open_modal:checked ~ .modal {
+            display: block;
+            width: 100%;
+            position: inherit;
+        }
+
+
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    color: rgb(246, 254, 254);
+    
+}
+body{
+    background: black;
+}
+
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: black;
+    color: #00f7ff;
+}
+header .logo {
+    display: flex;
+    justify-content: center;
+}
+h1{
+    color: #00f7ff;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #00f7ff;
+
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #00f7ff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+nav ul li a:hover {
+    color:#B42CCA;
+}
+
+/* HERO SECTION */
+.hero {
+    height: 80vh;
+    background: url('assets/quiz-bg.jpg') center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #00f7ff;
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+background-color: black;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 25px;
+    background:#B42CCA;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background: #B42CCA;
+}
+
+/* Container des cartes */
+.quiz-container {
+    display: flex;
+    background-color: black;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    justify-items: center; /* Centrer les cartes */
+    
+}
+.sel select{
+    color: #333;
+}
+
+/* Style de chaque carte */
+.quiz-card {
+    background-color: #00f7ff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 250px; /* Limiter la taille des cartes */
+    transition: transform 0.3s ease;
+}
+
+/* Effet de survol de la carte */
+.quiz-card:hover {
+    transform: scale(1.05);
+}
+
+/* Titre des cartes */
+.quiz-card h2 {
+    color: #B42CCA;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+/* Description des cartes */
+.quiz-card p {
+    font-size: 1em;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+/* Style du bouton */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #B42CCA;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Effet de survol du bouton */
+.btn:hover {
+    background-color: white;
+}
+
+/* FOOTER */
+footer {
+    background: black;
+    color: #00f7ff;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 14px;
+}
+/*connexion*/
+.formulaire {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; /* Centrer les éléments en colonne */
+}
+.formulaire form {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrer les éléments en colonne */
+}
+.formulaire label, .formulaire input {
+    margin-bottom: 10px; /* Ajouter un espace entre les éléments */
+}
+.formulaire input label{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+form{
+    opacity: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10%;
+}
+form label{
+    color: #00f7ff;
+}
+
+input {
+    border-radius: 10px;
+    color: #0d0d0d;
+}
+button {
+    background-color: #00f7ff;
+    color: #0d0d0d;
+    padding: 4px;
+    
+    cursor: pointer;
+    border-radius: 30px;
+}
+
+input[type="submit"] 
+        {
+            background-color:rgb(245, 246, 249);
+            color:#B42CCA;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+.quiz-section {
+    color: black;
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .quiz-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quiz-card {
+        max-width: 80%;
+        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th, table td {
+        padding: 10px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    nav ul li {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+
+    .hero {
+        height: 60vh;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .quiz-card {
+        max-width: 90%;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th, table td {
+        padding: 8px;
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    .hero {
+        height: 50vh;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .quiz-card {
+        max-width: 100%;
+    }
+
+    .quiz-card h2 {
+        font-size: 1.2em;
+    }
+
+    .quiz-card p {
+        font-size: 0.9em;
+    }
+
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table th, table td {
+        padding: 6px;
+        text-align: left;
+    }
+
+    .formulaire {
+        padding: 10px;
+    }
+
+    .formulaire form {
+        width: 100%;
+    }
+
+    .formulaire label, .formulaire input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
