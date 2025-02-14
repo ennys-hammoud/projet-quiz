@@ -13,7 +13,7 @@ $query->execute();
 $quizzes = $query->fetchAll(PDO::FETCH_ASSOC);
 
 $title = "Liste des Quiz";
-require 'header.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -21,11 +21,23 @@ require 'header.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Quiz App' ?></title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
 <header>
     <h1>Quizz'APP</h1>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="login.php">Connexion</a></li>
+              
+            <?php else: ?>
+                <li><a href="login.php">Connexion</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
 </header>
 
 <!-- SECTION D'ACCUEIL -->
@@ -47,4 +59,8 @@ require 'header.php';
     <?php endforeach; ?>
 </div>
 
-<?php require 'footer.php'; ?>
+<footer>
+    <p>&copy; 2025 Quiz Master. Tous droits réservés.</p>
+</footer>
+</body>
+</html>

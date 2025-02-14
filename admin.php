@@ -24,16 +24,32 @@ $stmt = $pdo->query("SELECT * FROM quizzes ORDER BY created_at DESC");
 $quizzes = $stmt->fetchAll();
 
 $title = "Admin - Dashboard";
-require 'header.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $title; ?></title>
+    <title><?= $title ?? 'Quiz App' ?></title>
     <link rel="stylesheet" href="admin.css">
 </head>
+<body>
+<header>
+    <h1>Quizz'APP</h1>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <li><a href="index.php">Quiz</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="logout.php">Déconnexion</a></li>
+            <?php else: ?>
+                <li><a href="login.php">Connexion</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</header>
 <body>
     <nav class="admin-nav">
         <ul>
@@ -82,15 +98,17 @@ require 'header.php';
                     <td><?php echo htmlspecialchars($quiz['category']); ?></td>
                     <td><?php echo $quiz['created_at']; ?></td>
                     <td>
-                        <a href='edit_quiz.php?id=<?= $quiz['id'] ?>' class="action-link">Modifier</a> |
-                        <a href='manage_questions.php?quiz_id=<?= $quiz['id'] ?>' class="action-link">Gérer Questions/Réponses</a> |
-                        <a href='delete_quiz.php?id=<?= $quiz['id'] ?>' class="action-link" onclick='return confirm("Supprimer ce quiz ?")'>Supprimer</a>
+                    <a href='edit_quiz.php?id=<?= $quiz['id'] ?>' class="action-link">Modifier</a> |
+                    <a href='edit_quiz.php?id=<?= $quiz['id'] ?>' class="action-link">Gérer Questions/Réponses</a> |
+                    <a href='delete_quiz.php?id=<?= $quiz['id'] ?>' class="action-link" onclick='return confirm("Supprimer ce quiz ?")'>Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
 
-<?php require 'footer.php'; ?>
+    <footer>
+    <p>&copy; 2025 Quiz Master. Tous droits réservés.</p>
+</footer>
 </body>
 </html>

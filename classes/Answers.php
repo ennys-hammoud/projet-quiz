@@ -9,17 +9,7 @@ class Answer {
     }
 
     // Ajouter une réponse à une question
-    public function addAnswer($question_id, $answer_text, $is_correct) {
-        $query = "INSERT INTO answers (question_id, answer_text, is_correct) VALUES (:question_id, :answer_text, :is_correct)";
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
-            ':question_id' => $question_id,
-            ':answer_text' => $answer_text,
-            ':is_correct' => $is_correct
-        ]);
-    }
-
-    public function addAnswers($question_id, $answer_text, $is_correct) {
+        public function addAnswers($question_id, $answer_text, $is_correct) {
         try {
             $query = "INSERT INTO answers (question_id, answer_text, is_correct) VALUES (:question_id, :answer_text, :is_correct)";
             $stmt = $this->pdo->prepare($query);
@@ -32,6 +22,12 @@ class Answer {
             // Gérer l'erreur ici (journalisation, message utilisateur, etc.)
             return false;
         }
+    }
+
+    public function deleteAnswer($id) {
+        $query = "DELETE FROM answers WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([':id' => $id]);
     }
 
     // Récupérer toutes les réponses pour une question

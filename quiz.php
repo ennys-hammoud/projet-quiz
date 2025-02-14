@@ -39,12 +39,13 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="quiz.css">
     <title>Quiz : <?= htmlspecialchars($quiz['title']) ?></title>
 </head>
 <body>
     <h1>Quiz : <?= htmlspecialchars($quiz['title']) ?> (<?= htmlspecialchars($quiz['category']) ?>)</h1>
 
-    <form action="submit.php" method="POST">
+    <form action="submit_quiz.php" method="POST">
         <input type="hidden" name="quiz_id" value="<?= $quiz_id ?>">
 
         <?php foreach ($questions as $question): ?>

@@ -16,10 +16,7 @@ header {
     padding: 20px 50px;
     background: black;
     color: #00f7ff;
-}
-header .logo {
-    display: flex;
-    justify-content: center;
+    padding-right: 20px;  /* Ajout d'un petit espace à droite */
 }
 
 .logo {
@@ -27,16 +24,17 @@ header .logo {
     justify-content: center;
     font-size: 24px;
     font-weight: bold;
-
 }
 
 nav ul {
     list-style: none;
     display: flex;
+    justify-content: center;  /* Centrer la liste des liens */
+    padding-left: 0; /* Enlever les espaces à gauche */
 }
 
 nav ul li {
-    margin-left: 20px;
+    margin-left: 15px; /* Réduire l'espacement entre les éléments */
 }
 
 nav ul li a {

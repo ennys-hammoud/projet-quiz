@@ -1,5 +1,4 @@
+<!-- footer.php -->
 <footer>
-        <p>&copy; 2025 Quizz'APP - Tous droits réservés.</p>
-    </footer>
-</body>
-</html>
+    <p>&copy; 2025 Quiz Master. Tous droits réservés.</p>
+</footer>

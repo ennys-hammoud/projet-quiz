@@ -17,7 +17,7 @@ if (!isset($_SESSION["user_id"])) {
 
 // Vérifier si un ID de quiz est passé en paramètre
 if (!isset($_GET["id"]) || !is_numeric($_GET["id"])) {
-    echo "ID invalide.";
+    echo "ID de quiz invalide.";
     exit;
 }
 
@@ -72,53 +72,7 @@ if (isset($_GET["delete_question"])) {
 $stmt = $pdo->prepare("SELECT * FROM questions WHERE quiz_id = ?");
 $stmt->execute([$id]);
 $questions = $stmt->fetchAll();
-?>
 
-<h2>Modifier le Quiz</h2>
-<form method="post">
-    <label for="title">Titre du quiz :</label>
-    <input type="text" id="title" name="title" value="<?= htmlspecialchars($quiz['title']) ?>" required>
-
-    <label for="category">Catégorie :</label>
-    <input type="text" id="category" name="category" value="<?= htmlspecialchars($quiz['category']) ?>" required>
-
-    <button type="submit" name="update_quiz">Modifier</button>
-</form>
-
-<h2>Questions du Quiz</h2>
-<form method="post">
-    <label for="question_text">Nouvelle question :</label>
-    <input type="text" id="question_text" name="question_text" required>
-    <button type="submit" name="add_question">Ajouter Question</button>
-</form>
-
-<?php foreach ($questions as $question): ?>
-    <div>
-        <p><?= htmlspecialchars($question["question_text"]) ?> 
-            <a href="edit_quiz.php?id=<?= $id ?>&delete_question=<?= $question['id'] ?>" onclick="return confirm('Supprimer cette question ?')">🗑️</a>
-        </p>
-        
-        <form method="post">
-            <input type="hidden" name="question_id" value="<?= $question['id'] ?>">
-            <input type="text" name="answer_text" placeholder="Ajouter une réponse">
-            <button type="submit" name="add_answer">Ajouter Réponse</button>
-        </form>
-
-        <ul>
-            <?php
-            $stmt = $pdo->prepare("SELECT * FROM answers WHERE question_id = ?");
-            $stmt->execute([$question["id"]]);
-            $answers = $stmt->fetchAll();
-            foreach ($answers as $answer): ?>
-                <li><?= htmlspecialchars($answer["answer_text"]) ?> 
-                    <a href="edit_quiz.php?id=<?= $id ?>&delete_answer=<?= $answer['id'] ?>" onclick="return confirm('Supprimer cette réponse ?')">🗑️</a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-<?php endforeach; ?>
-
-<?php
 // Ajouter une réponse
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["add_answer"])) {
     $question_id = $_POST["question_id"];
@@ -140,3 +94,73 @@ if (isset($_GET["delete_answer"])) {
     exit;
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier le Quiz</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header>
+    <h1>Modifier le Quiz</h1>
+</header>
+
+<div class="admin-section">
+    <form method="post">
+        <label for="title">Titre du quiz :</label>
+        <input type="text" id="title" name="title" value="<?= htmlspecialchars($quiz['title']) ?>" required>
+
+        <label for="category">Catégorie :</label>
+        <input type="text" id="category" name="category" value="<?= htmlspecialchars($quiz['category']) ?>" required>
+
+        <button type="submit" name="update_quiz" class="btn">Modifier</button>
+    </form>
+
+    <h2>Questions du Quiz</h2>
+    <form method="post">
+        <label for="question_text">Nouvelle question :</label>
+        <input type="text" id="question_text" name="question_text" required>
+        <button type="submit" name="add_question" class="btn">Ajouter Question</button>
+    </form>
+
+    <?php if (!empty($_GET['message'])): ?>
+        <p style="color: green;"><?= htmlspecialchars($_GET['message']) ?></p>
+    <?php endif; ?>
+
+    <?php foreach ($questions as $question): ?>
+        <div class="question">
+            <p><?= htmlspecialchars($question["question_text"]) ?> 
+                <a href="edit_quiz.php?id=<?= $id ?>&delete_question=<?= $question['id'] ?>" onclick="return confirm('Supprimer cette question ?')">🗑️</a>
+            </p>
+
+            <form method="post">
+                <input type="hidden" name="question_id" value="<?= $question['id'] ?>">
+                <input type="text" name="answer_text" placeholder="Ajouter une réponse" required>
+                <button type="submit" name="add_answer" class="btn">Ajouter Réponse</button>
+            </form>
+
+            <ul>
+                <?php
+                $stmt = $pdo->prepare("SELECT * FROM answers WHERE question_id = ?");
+                $stmt->execute([$question["id"]]);
+                $answers = $stmt->fetchAll();
+                foreach ($answers as $answer): ?>
+                    <li><?= htmlspecialchars($answer["answer_text"]) ?> 
+                        <a href="edit_quiz.php?id=<?= $id ?>&delete_answer=<?= $answer['id'] ?>" onclick="return confirm('Supprimer cette réponse ?')">🗑️</a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+<footer>
+    <p>&copy; 2025 Quiz Master. Tous droits réservés.</p>
+</footer>
+
+</body>
+</html>

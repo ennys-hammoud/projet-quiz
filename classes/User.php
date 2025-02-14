@@ -12,30 +12,50 @@ class User {
     }
 
     // Inscription utilisateur
-    public function register($username, $email, $password) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    public function register($username, $password) {
+        try {
+            // Vérifier si le nom d'utilisateur existe déjà
+            $query = "SELECT id FROM users WHERE username = :username";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':username' => $username]);
+            if ($stmt->rowCount() > 0) {
+                return "Nom d'utilisateur déjà pris.";
+            }
 
-        $query = "INSERT INTO users (username, , password) VALUES (:username, :password)";
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
-            ':username' => $username,
-            ':password' => $hashedPassword
-        ]);
+            // Hachage du mot de passe
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO users (username, password) VALUES (:username, :password)";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([
+                ':username' => $username,
+                ':password' => $hashedPassword
+            ]);
+            return true;
+        } catch (PDOException $e) {
+            echo "Erreur lors de l'inscription : " . $e->getMessage();
+            return false;
+        }
     }
 
     // Connexion utilisateur
-    public function login($username, $password){
-        $query = "SELECT id, username, password FROM users WHERE username = :username";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([':username' => $username]);
-        $user = $stmt->fetch();
+    public function login($username, $password) {
+        try {
+            $query = "SELECT id, username, password FROM users WHERE username = :username";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':username' => $username]);
+            $user = $stmt->fetch();
 
-        if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            return true;
+            if ($user && password_verify($password, $user['password'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                return true;
+            } else {
+                return "Identifiants incorrects.";
+            }
+        } catch (PDOException $e) {
+            echo "Erreur lors de la connexion : " . $e->getMessage();
+            return false;
         }
-        return false;
     }
 
     // Vérifier si l'utilisateur est connecté
@@ -53,9 +73,15 @@ class User {
 
     // Récupérer un utilisateur par son ID
     public function getUserById($id) {
-        $query = "SELECT id, username FROM users WHERE id = :id";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetch();
+        try {
+            $query = "SELECT id, username FROM users WHERE id = :id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération de l'utilisateur : " . $e->getMessage();
+            return false;
+        }
     }
 }
+?>

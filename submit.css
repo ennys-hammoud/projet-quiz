@@ -1,0 +1,91 @@
+/* Général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;  /* Fond noir comme dans la charte graphique */
+    color: #00f7ff;  /* Texte en cyan */
+    margin: 0;
+    padding: 0;
+}
+
+/* Titre principal */
+h1 {
+    font-size: 2em;
+    color: #00f7ff;  /* Cyan */
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Détails du score */
+p {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 10px;
+    color: #00f7ff;  /* Cyan */
+}
+
+/* Détails des réponses */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* Style pour chaque élément de réponse */
+li {
+    background-color: #333;  /* Fond gris foncé */
+    border: 1px solid #00f7ff;  /* Bordure cyan */
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    color: #00f7ff;  /* Texte cyan */
+}
+
+/* Mise en valeur des réponses */
+strong {
+    font-weight: bold;
+}
+
+/* Résultats Corrects et Incorrects */
+span {
+    font-style: italic;
+}
+
+span[style="color: red;"] {
+    color: red;  /* Réponses incorrectes en rouge */
+}
+
+span[style="color: green;"] {
+    color: green;  /* Réponses correctes en vert */
+}
+
+/* Lien de retour */
+a {
+    display: block;
+    text-align: center;
+    background-color: #B42CCA;  /* Couleur du bouton en violet */
+    color: white;
+    padding: 10px;
+    margin-top: 30px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: white;
+    color: #B42CCA;  /* Change la couleur au survol */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    p {
+        font-size: 1em;
+    }
+}

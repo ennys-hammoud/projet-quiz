@@ -1,54 +1,52 @@
 <?php
-require_once 'Database.php';
-
 class Quiz {
     private $pdo;
 
-    public function __construct(Database $db) {
-        $this->pdo = $db->getConnection();
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
     }
 
-    // Ajouter un quiz
-    public function addQuiz($title, $category) {
-        $query = "INSERT INTO quizzes (title, category) VALUES (:title, :category)";
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
-            ':title' => $title,
-            ':category' => $category
-        ]);
-    }
-
-    // Récupérer tous les quiz
-    public function getAllQuizzes() {
-        $query = "SELECT * FROM quizzes";
-        $stmt = $this->pdo->query($query);
-        return $stmt->fetchAll();
-    }
-
-    // Récupérer un quiz par son ID
     public function getQuizById($id) {
-        $query = "SELECT * FROM quizzes WHERE id = :id";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute([':id' => $id]);
+        $stmt = $this->pdo->prepare("SELECT * FROM quizzes WHERE id = ?");
+        $stmt->execute([$id]);
         return $stmt->fetch();
     }
 
-    // Modifier un quiz
     public function updateQuiz($id, $title, $category) {
-        $query = "UPDATE quizzes SET title = :title, category = :category WHERE id = :id";
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
-            ':id' => $id,
-            ':title' => $title,
-            ':category' => $category
-        ]);
+        $stmt = $this->pdo->prepare("UPDATE quizzes SET title = ?, category = ? WHERE id = ?");
+        $stmt->execute([$title, $category, $id]);
     }
 
-    // Supprimer un quiz
-    public function deleteQuiz($id) {
-        $query = "DELETE FROM quizzes WHERE id = :id";
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([':id' => $id]);
+    public function getQuestions($quiz_id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM questions WHERE quiz_id = ?");
+        $stmt->execute([$quiz_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function addQuestion($quiz_id, $question_text) {
+        $stmt = $this->pdo->prepare("INSERT INTO questions (quiz_id, question_text) VALUES (?, ?)");
+        $stmt->execute([$quiz_id, $question_text]);
+    }
+
+    public function deleteQuestion($question_id) {
+        $stmt = $this->pdo->prepare("DELETE FROM questions WHERE id = ?");
+        $stmt->execute([$question_id]);
+    }
+
+    public function getAnswers($question_id) {
+        $stmt = $this->pdo->prepare("SELECT * FROM answers WHERE question_id = ?");
+        $stmt->execute([$question_id]);
+        return $stmt->fetchAll();
+    }
+
+    public function addAnswer($question_id, $answer_text) {
+        $stmt = $this->pdo->prepare("INSERT INTO answers (question_id, answer_text) VALUES (?, ?)");
+        $stmt->execute([$question_id, $answer_text]);
+    }
+
+    public function deleteAnswer($answer_id) {
+        $stmt = $this->pdo->prepare("DELETE FROM answers WHERE id = ?");
+        $stmt->execute([$answer_id]);
     }
 }
 ?>
