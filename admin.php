@@ -53,7 +53,6 @@ $title = "Admin - Dashboard";
 <body>
     <nav class="admin-nav">
         <ul>
-            <li><a href="admin.php">Dashboard</a></li>
             <li><a href="add_quiz.php">Ajouter un Quiz</a></li>
             <li><a href="manage_users.php">Gérer les Utilisateurs</a></li>
             <li><a href="logout.php">Déconnexion</a></li>

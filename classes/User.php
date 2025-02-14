@@ -83,5 +83,31 @@ class User {
             return false;
         }
     }
+
+     // Récupérer tous les utilisateurs
+     public function getAllUsers() {
+        try {
+            $query = "SELECT id, username FROM users";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } catch (PDOException $e) {
+            echo "Erreur lors de la récupération des utilisateurs : " . $e->getMessage();
+            return false;
+        }
+    }
+
+    // Supprimer un utilisateur
+    public function deleteUser($id) {
+        try {
+            $query = "DELETE FROM users WHERE id = :id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':id' => $id]);
+        } catch (PDOException $e) {
+            echo "Erreur lors de la suppression de l'utilisateur : " . $e->getMessage();
+        }
+    }
+
+    
 }
 ?>
