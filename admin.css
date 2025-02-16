@@ -104,14 +104,6 @@ h1, h2, h3 {
     font-weight: bold;
 }
 
-table {
-    width: 80%;
-    border-collapse: collapse;
-    background-color: #1c1c1c;
-    box-shadow: 0 0 10px rgba(0, 247, 255, 0.5);
-    border-radius: 8px;
-    overflow: hidden;
-}
 
 thead {
     background-color: #B42CCA;
@@ -187,4 +179,28 @@ footer {
 
 .admin-nav a:hover {
     color: #B42CCA;
+}
+
+.user-management-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.user-management-container table {
+    border-collapse: collapse;
+    width: 80%;
+    max-width: 800px;
+    margin-top: 15px;
+}
+
+.user-management-container th, .user-management-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.user-management-container th {
+    background-color: #f2f2f2;
 }

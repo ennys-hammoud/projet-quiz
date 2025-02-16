@@ -30,6 +30,7 @@ $title = "Gestion des utilisateurs";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?? 'Quiz App' ?></title>
     <link rel="stylesheet" href="admin.css">
+    
 </head>
 <body>
 <header>
