@@ -71,6 +71,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <title>Résultats du Quiz</title>
 </head>
 <body>
+<header>
+    <h1>Quizz'APP</h1>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="index.php">Accueil</a></li>
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <li><a href="login.php">Connexion</a></li>
+            
+            <?php else: ?>
+                <li><a href="login.php">Connexion</a></li>
+            <?php endif; ?>
+        </ul>
+    </nav>
+</header>
     <h1>Résultats du Quiz : <?= htmlspecialchars($quiz['title']) ?></h1>
     <p>Votre score : <?= $score ?> / <?= $total_questions ?> (<?= number_format($score_percent, 2) ?>%)</p>
 
