@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once 'classes/Database.php';
+require_once 'Config/Database.php';
 require_once 'classes/Quiz.php';
 
 $db = new Database();
@@ -31,9 +31,10 @@ $title = "Liste des Quiz";
         <ul>
             <li><a href="index.php">Accueil</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="login.php">Connexion</a></li>
-            
+                <!-- Afficher le lien de déconnexion si l'utilisateur est connecté -->
+                <li><a href="logout.php">Déconnexion</a></li>
             <?php else: ?>
+                <!-- Afficher le lien de connexion si l'utilisateur n'est pas connecté -->
                 <li><a href="login.php">Connexion</a></li>
             <?php endif; ?>
         </ul>

@@ -1,10 +1,12 @@
 <?php
-require_once 'classes/Database.php';  // Pour la connexion à la base de données
-require_once 'classes/Quiz.php';     // Pour la classe Quiz
-require_once 'classes/Answers.php';   // Pour la classe Answer
-require_once 'classes/Question.php'; // Pour la classe Question
-require_once 'classes/User.php';     // Pour la classe User
+// Chargement des classes
+require_once __DIR__ . 'Config/Database.php';
+require_once __DIR__ . '/classes/Quiz.php';
+require_once __DIR__ . '/classes/Answers.php';
+require_once __DIR__ . '/classes/Question.php';
+require_once __DIR__ . '/classes/User.php';
 
+// Initialisation de la connexion à la base de données
 $db = new Database();
 $pdo = $db->getConnection();
 ?>

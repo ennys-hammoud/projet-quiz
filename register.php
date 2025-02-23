@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/Database.php';  // Connexion à la base de données
+require_once 'Config/Database.php';  // Connexion à la base de données
 require_once 'classes/User.php';      // Pour la classe User
 
 $db = new Database();

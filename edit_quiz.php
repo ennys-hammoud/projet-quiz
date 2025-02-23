@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'classes/Database.php';
+require_once 'Config/Database.php';
 require_once 'classes/Quiz.php';
 require_once 'classes/Answers.php';
 require_once 'classes/Question.php';
