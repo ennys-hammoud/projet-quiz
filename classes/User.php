@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php'; // Database connection class
+require_once __DIR__ . '/../Config/Database.php';
 
 class User {
     private $pdo;

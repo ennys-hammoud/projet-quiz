@@ -7,19 +7,19 @@ $title = "Connexion";
 <head>
     <meta charset="UTF-8">
     <title><?= $title ?></title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/projet-quiz/login.css">
     <h1>Quizz'APP</h1>
     <!-- Navbar -->
     <nav>
         <ul>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="index.php">Quiz</a></li>
+            <li><a href="/projet-quiz/index.php">Accueil</a></li>
+            <li><a href="/projet-quiz/index.php">Quiz</a></li>
             <?php if (isset($_SESSION['user_id'])): ?>
-                <li><a href="index.php">Accueil</a></li>
-                <li><a href="quiz.php">Quiz</a></li>
-                <li><a href="admin.php">Admin</a></li>
+                <li><a href="/projet-quiz/index.php">Accueil</a></li>
+                <li><a href="/projet-quiz/quiz.php">Quiz</a></li>
+                <li><a href="/projet-quiz/admin.php">Admin</a></li>
             <?php else: ?>
-                <li><a href="login.php">Connexion</a></li>
+                <li><a href="/projet-quiz/login.php">Connexion</a></li>
             <?php endif; ?>
         </ul>
     </nav>

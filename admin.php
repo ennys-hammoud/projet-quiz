@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'Config/Database.php';  // Connexion DB
+require_once __DIR__ . '/Config/Database.php';
 require_once 'classes/Quiz.php';     // Classe Quiz
 require_once 'classes/Answers.php';  // Classe Answer
 require_once 'classes/Question.php'; // Classe Question

@@ -1,5 +1,5 @@
 <?php
-require_once 'Database.php';
+require_once __DIR__ . '/../Config/Database.php';
 
 class Question {
     private $pdo;

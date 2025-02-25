@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'Config/Database.php'; // Pour la connexion à la base de données
+require_once __DIR__ . '/Config/Database.php'; // Pour la connexion à la base de données
 require_once 'classes/Quiz.php';     // Pour la classe Quiz
 require_once 'classes/Answers.php';   // Pour la classe Answer
 require_once 'classes/Question.php'; // Pour la classe Question
@@ -32,8 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($title) && !empty($theme)) {
         $stmt = $pdo->prepare("INSERT INTO quizzes (title, category) VALUES (?, ?)");
         $stmt->execute([$title, $theme]);
+        echo "Quiz ajouté avec succès ! <a href='admin.php'>Retour</a>";
         echo "<p class='message success'>Quiz ajouté avec succès ! <a href='admin.php'>Retour</a></p>";
     } else {
+        echo "Veuillez remplir tous les champs.";
         echo "<p class='message error'>Veuillez remplir tous les champs.</p>";
     }
 }
